@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PAC Volunteer Challenge – Live Leaderboard</title>
-  <meta name="description" content="Live house rankings and challenge info for the PAC Volunteer Challenge." />
+  <title>MWB Execs Challenge – Live Leaderboard</title>
+  <meta name="description" content="Live team rankings and challenge information for the MWB Execs Challenge." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -129,9 +129,9 @@
 
   <header id="siteHeader">
     <div class="container nav">
-      <a class="brand" href="./" aria-label="PAC Challenge home">
-        <img class="brand-logo" src="PAC Logo.svg" alt="PAC logo" />
-        <span>PAC Challenge</span>
+      <a class="brand" href="./" aria-label="MWB Execs Challenge home">
+        <img class="brand-logo" src="MWB Logo.png" alt="MWB logo" />
+        <span>MWB Execs Challenge</span>
         <span class="chip">Live</span>
       </a>
       <div class="links">
@@ -160,21 +160,21 @@
   <main class="container">
     <section class="grid">
       <div class="card">
-        <h1>House Leaderboard</h1>
-        <p class="small muted">Live standings for the four houses. Keep completing challenges to push your team up the board.</p>
+        <h1>Team Leaderboard</h1>
+        <p class="small muted">Live standings for the four teams. Keep completing challenges to push your team up the board.</p>
         <div class="row" id="houseStats"></div>
         <table id="houseTable" style="margin-top:12px">
-          <thead><tr><th>Rank</th><th>House</th><th>Captain</th><th>Total Points</th></tr></thead>
+          <thead><tr><th>Rank</th><th>Team</th><th>Lead</th><th>Total Points</th></tr></thead>
           <tbody></tbody>
         </table>
         <div id="houseError" class="error small"></div>
       </div>
 
       <div class="card">
-        <h2>Top 5 Individuals</h2>
-        <p class="small muted">Live ranking of volunteers based on approved points.</p>
+        <h2>Top 5 Participants</h2>
+        <p class="small muted">Live ranking of participants based on approved points.</p>
         <table id="top5Table">
-          <thead><tr><th>Rank</th><th>Name</th><th>House</th><th>Points</th></tr></thead>
+          <thead><tr><th>Rank</th><th>Name</th><th>Team</th><th>Points</th></tr></thead>
           <tbody></tbody>
         </table>
         <div id="indTopError" class="error small"></div>
@@ -182,9 +182,9 @@
     </section>
 
     <section class="card" id="full-leaderboard" style="margin-top:20px">
-      <h2>Individual Leaderboard (Full)</h2>
+      <h2>Participant Leaderboard (Full)</h2>
       <table id="indivTable">
-        <thead><tr><th>Rank</th><th>Name</th><th>House</th><th>Points</th></tr></thead>
+        <thead><tr><th>Rank</th><th>Name</th><th>Team</th><th>Points</th></tr></thead>
         <tbody></tbody>
       </table>
       <div id="indError" class="error small"></div>
@@ -192,7 +192,7 @@
   </main>
 
   <footer>
-    Built for PAC by your team • Refreshes automatically • Privacy-safe (read-only)
+    Built for MWB Execs • Refreshes automatically • Privacy-safe (read-only)
   </footer>
 
   <!-- 👇 NEW: WINNER MODAL GOES JUST BEFORE </body> -->
@@ -202,7 +202,7 @@
               background:rgba(0,0,0,.55);backdrop-filter:blur(4px);z-index:30;">
     <div class="card"
          style="max-width:680px;width:min(92%,680px);text-align:center;padding:28px 22px;">
-      <div class="small muted" style="margin-bottom:6px;">PAC Challenge</div>
+      <div class="small muted" style="margin-bottom:6px;">MWB Execs Challenge</div>
       <h2 id="winnerTitle"
           style="font-size:clamp(22px,3vw,30px);margin:.1rem 0 10px;">We have a winner!</h2>
       <p id="winnerSubtitle" style="font-size:clamp(16px,2.2vw,18px);"></p>
@@ -220,7 +220,7 @@
       challengeDocURL:"https://docs.google.com/document/d/1j3UUIg44EYJbwhgLaZoyTG-nD0Af_nuqWdvY7mDyT7g/edit?usp=sharing"
     };
 
-    const CAPTAINS = {"Quds":"Mohammad Eldib","Gaza":"Ghassan Abuamsha","Qalqilya":"Nour Issa","Jenin":"Reyan Alsoubani"};
+    const CAPTAINS = {};
     let lastLeader=null, lastRowPositions=null;
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -283,7 +283,7 @@
       setTimeout(()=>cancelAnimationFrame(rafId), 2200);
     }
 
-    function renderHouses(rows){
+    function renderTeams(rows){
       const tbody=document.querySelector('#houseTable tbody');
       const stats=document.getElementById('houseStats');
       lastRowPositions = measureRowPositions();
@@ -311,7 +311,7 @@
         if(i===0)d.style.background='linear-gradient(180deg, rgba(245,215,112,.18), rgba(245,215,112,.08))';
         if(i===1)d.style.background='linear-gradient(180deg, rgba(207,215,230,.16), rgba(207,215,230,.06))';
         if(i===2)d.style.background='linear-gradient(180deg, rgba(231,178,138,.16), rgba(231,178,138,.06))';
-        d.innerHTML=`<div class="small muted">#${i+1} House</div><div style="font-weight:800;font-size:1.1rem">${r.house}</div><div class="small muted">${formatNumber(r.points)} pts • Captain:<br>${CAPTAINS[r.house]||"—"}</div>`;
+        d.innerHTML=`<div class="small muted">#${i+1} Team</div><div style="font-weight:800;font-size:1.1rem">${r.house}</div><div class="small muted">${formatNumber(r.points)} pts • Lead:<br>${CAPTAINS[r.house]||"—"}</div>`;
         stats.appendChild(d);
       });
 
@@ -363,14 +363,14 @@
     async function load(){
       try{
         const houseText=await fetchCSV(CONFIG.houseCSV);
-        renderHouses(parseCSV(houseText));
+        renderTeams(parseCSV(houseText));
 
         const indivText=await fetchCSV(CONFIG.individualCSV);
         const rows=parseCSV(indivText);
         renderTop5(rows);
         renderIndividuals(rows);
       }catch(err){
-        document.getElementById('houseError').textContent='House data error: '+err.message;
+        document.getElementById('houseError').textContent='Team data error: '+err.message;
         document.getElementById('indError').textContent='Individual data error: '+err.message;
         document.getElementById('indTopError').textContent='Individual data error: '+err.message;
       }
@@ -578,7 +578,7 @@
       const subEl   = document.getElementById('winnerSubtitle');
 
       titleEl.textContent = `🏆 Winner: ${WINNER_HOUSE}`;
-      subEl.textContent   = `${WINNER_HOUSE} has won the PAC Volunteer Challenge!`;
+      subEl.textContent   = `${WINNER_HOUSE} has won the MWB Execs Challenge!`;
 
       modal.style.display = 'flex';
     }
