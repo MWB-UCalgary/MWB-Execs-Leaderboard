@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MWB Execs Leaderboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            text-align: center;
+            padding: 40px;
+        }
+
+        h1 {
+            color: #7a1f2b;
+        }
+
+        .team {
+            background: white;
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 500px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .rank {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .score {
+            font-size: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>MWB Execs Leaderboard</h1>
+
+<div class="team">
+    <div class="rank">🥇 Events</div>
+    <div class="score">300 Points</div>
+</div>
+
+<div class="team">
+    <div class="rank">🥈 Admin + Comms</div>
+    <div class="score">280 Points</div>
+</div>
+
+<div class="team">
+    <div class="rank">🥉 Marketing</div>
+    <div class="score">250 Points</div>
+</div>
+
+<div class="team">
+    <div class="rank">Finance + Bake Sale</div>
+    <div class="score">220 Points</div>
+</div>
+
+</body>
+</html>
