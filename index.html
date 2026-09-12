@@ -164,7 +164,7 @@
         <p class="small muted">Live standings for the four teams. Keep completing challenges to push your team up the board.</p>
         <div class="row" id="houseStats"></div>
         <table id="houseTable" style="margin-top:12px">
-          <thead><tr><th>Rank</th><th>Team</th><th>Lead</th><th>Total Points</th></tr></thead>
+          <thead><tr><th>Rank</th><th>Team</th><th>Total Points</th></tr></thead>
           <tbody></tbody>
         </table>
         <div id="houseError" class="error small"></div>
@@ -291,7 +291,7 @@ const CONFIG = {
       lastRowPositions = measureRowPositions();
       tbody.innerHTML=''; stats.innerHTML='';
 
-      const data=rows.slice(1).map(r=>({house:r[0],points:+r[1]||0})).sort((a,b)=>b.points-a.points);
+      const data=rows.slice(1).map(r=>({house:r[1],points:+r[2]||0})).sort((a,b)=>b.points-a.points);
       const currentLeader = data[0]?.house || null;
       if(lastLeader && currentLeader && currentLeader !== lastLeader){ confettiBurst(); }
       lastLeader = currentLeader;
@@ -303,7 +303,7 @@ const CONFIG = {
         if(i===0) tr.classList.add('medal-1');
         else if(i===1) tr.classList.add('medal-2');
         else if(i===2) tr.classList.add('medal-3');
-        tr.innerHTML=`<td class="rank">${i+1}</td><td><span class="house-pill">${r.house}</span></td><td>${CAPTAINS[r.house]||"—"}</td><td>${formatNumber(r.points)}</td>`;
+        tr.innerHTML=`<td class="rank">${i+1}</td><td><span class="house-pill">${r.house}</span></td><td>${formatNumber(r.points)}</td>`;
         tbody.appendChild(tr);
       });
 
@@ -341,7 +341,7 @@ const CONFIG = {
     function renderTop5(rows){
       const tbody=document.querySelector('#top5Table tbody');
       tbody.innerHTML='';
-      const data=rows.slice(1).map(r=>({name:r[0],house:r[1],points:+r[2]||0}))
+      const data=rows.slice(1).map(r=>({name:r[1],house:r[2],points:+r[3]||0}))
         .sort((a,b)=>b.points-a.points).slice(0,5);
       data.forEach((r,i)=>{
         const tr=document.createElement('tr');
@@ -353,7 +353,7 @@ const CONFIG = {
     function renderIndividuals(rows){
       const tbody=document.querySelector('#indivTable tbody');
       tbody.innerHTML='';
-      const data=rows.slice(1).map(r=>({name:r[0],house:r[1],points:+r[2]||0}))
+      const data=rows.slice(1).map(r=>({name:r[1],house:r[2],points:+r[3]||0}))
         .sort((a,b)=>b.points-a.points);
       data.forEach((r,i)=>{
         const tr=document.createElement('tr');
@@ -364,8 +364,8 @@ const CONFIG = {
 
     async function load(){
       try{
-        const houseText=await fetchCSV(CONFIG.houseCSV);
-        renderTeams(parseCSV(houseText));
+        const teamText=await fetchCSV(CONFIG.teamCSV);
+        renderTeams(parseCSV(teamText));
 
         const indivText=await fetchCSV(CONFIG.individualCSV);
         const rows=parseCSV(indivText);
